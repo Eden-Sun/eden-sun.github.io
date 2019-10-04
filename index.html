@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<span> name </span>
+			<input v-model="name" placeholder="edit me">
+			<span> age </span>
+			<input v-model="age" placeholder="edit me">
+			<button v-on:click="send"> submit </button>
+			<iframe :src="src" style="display: none"></iframe>
+			<br>
+			{{ result }}
+			<a href="https://docs.google.com/spreadsheets/d/1Ddxwuph9O2jVuWNAnjnkOY-kk9A6HrDZW9VLdv8RlRQ/edit#gid=392013199"> table </a>
+		</div>
+		<script defer>
+			var app = new Vue({
+				el: '#app',
+				data: {
+					name: '',
+					age: '',
+					src: '',
+					result: ''
+				},
+				mount () {
+					console.log(123)
+				},
+				methods: {
+					send () {
+						console.log(123)
+						var uri = "https://docs.google.com/forms/d/e/1FAIpQLSckE0AHAikMllt21omDD5qPL2rcpM95-iqv4GA01tM4Q3Dydw/formResponse"
+						var params =  `?entry.1255487498=${this.age}&entry.287448428=${this.name}`
+						this.src = uri + params
+						this.name = ''
+						this.age = ''
+						this.result = 'Done, go see your form'
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
